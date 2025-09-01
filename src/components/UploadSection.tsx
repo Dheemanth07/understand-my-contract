@@ -32,16 +32,21 @@ const UploadSection = () => {
     
     if (pdfFiles.length > 0) {
       setFiles(pdfFiles);
-      toast({
-        title: "Files uploaded successfully",
-        description: `${pdfFiles.length} PDF file(s) ready for processing.`,
-      });
+      // Use setTimeout to avoid calling toast during render
+      setTimeout(() => {
+        toast({
+          title: "Files uploaded successfully",
+          description: `${pdfFiles.length} PDF file(s) ready for processing.`,
+        });
+      }, 0);
     } else {
-      toast({
-        title: "Invalid file type",
-        description: "Please upload PDF files only.",
-        variant: "destructive",
-      });
+      setTimeout(() => {
+        toast({
+          title: "Invalid file type",
+          description: "Please upload PDF files only.",
+          variant: "destructive",
+        });
+      }, 0);
     }
   }, [toast]);
 
@@ -51,10 +56,12 @@ const UploadSection = () => {
     
     if (pdfFiles.length > 0) {
       setFiles(pdfFiles);
-      toast({
-        title: "Files selected successfully",
-        description: `${pdfFiles.length} PDF file(s) ready for processing.`,
-      });
+      setTimeout(() => {
+        toast({
+          title: "Files selected successfully",
+          description: `${pdfFiles.length} PDF file(s) ready for processing.`,
+        });
+      }, 0);
     }
   };
 
@@ -74,15 +81,25 @@ const UploadSection = () => {
         if (prev >= 100) {
           clearInterval(progressInterval);
           setIsProcessing(false);
-          toast({
-            title: "Processing complete!",
-            description: "Your documents have been simplified successfully.",
-          });
+          setTimeout(() => {
+            toast({
+              title: "Processing complete!",
+              description: "Your documents have been simplified successfully.",
+            });
+          }, 0);
           return 100;
         }
         return prev + 10;
       });
     }, 300);
+  };
+
+  const viewResults = () => {
+    // Scroll to the DocumentComparison section
+    const comparisonSection = document.querySelector('#document-comparison');
+    if (comparisonSection) {
+      comparisonSection.scrollIntoView({ behavior: 'smooth' });
+    }
   };
 
   const formatFileSize = (bytes: number) => {
@@ -211,7 +228,7 @@ const UploadSection = () => {
             </Button>
             
             {uploadProgress === 100 && (
-              <Button variant="accent" size="lg" className="px-8">
+              <Button variant="accent" size="lg" className="px-8" onClick={viewResults}>
                 <CheckCircle className="w-5 h-5" />
                 View Results
               </Button>
