@@ -21,7 +21,7 @@ const LegalHero = () => {
           {/* Main Heading */}
           <div className="space-y-4">
             <h1 className="text-5xl md:text-7xl font-bold leading-tight">
-              Simplify <span className="text-legal-secondary">Legal</span> Documents
+              Simplify <span className="text-white font-extrabold">Legal</span> Documents
             </h1>
             <p className="text-xl md:text-2xl text-legal-light/90 max-w-3xl mx-auto leading-relaxed">
               Transform complex legal jargon into plain English. Upload any contract or agreement 
